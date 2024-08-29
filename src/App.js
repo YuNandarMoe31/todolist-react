@@ -22,27 +22,46 @@ function App() {
     fetchTasks()
   }, [])
 
-  const addNewTask = async(task) => {
+  const addNewTask = async (task) => {
     const newTask = {
-      id : uuid(),
-      task : task,
-      complete : false
+      id: uuid(),
+      task: task,
+      complete: false
     }
-    
+
     const res = await api.post('/todolist', newTask)
-    console.log(res)
+    // console.log(res)
     setTasks([...tasks, res.data])
   }
 
-  const deleteTask = async(id) => {
+  const deleteTask = async (id) => {
     const res = await api.delete(`/todolist/${id}`)
 
-    if(res.statusText === "OK") {
+    if (res.statusText === "OK") {
       setTasks(tasks.filter(task => task.id !== id))
     }
 
     // console.log(res)
   }
+
+  const updateTask = async (id, complete) => {
+    const res = await api.patch(`/todolist/${id}`, {
+      complete
+    })
+   
+    setTasks(tasks.map(task => {
+      if (task.id === id) {
+        return {
+          id: task.id,
+          task: task.task,
+          complete: !task.complete
+        }
+      }
+      return task;
+    }))
+
+  }
+
   return (
     <>
       <div className="w-full h-screen  bg-zinc-800 flex flex-col gap-y-9 justify-center items-center">
@@ -50,7 +69,7 @@ function App() {
         <Form addNewTask={addNewTask} />
         {
           loading ? <h1 className="text-2xl text-center text-gray-300 my-5">Loading ....</h1> :
-          <List tasks={tasks} deleteTask={deleteTask} />
+            <List tasks={tasks} deleteTask={deleteTask} updateTask={updateTask} />
         }
       </div>
     </>

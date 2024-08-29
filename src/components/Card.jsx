@@ -1,7 +1,7 @@
 import React from "react";
 import { BiXCircle } from "react-icons/bi";
 
-const Card = ({ tasks, deleteTask }) => {
+const Card = ({ tasks, deleteTask, updateTask }) => {
 
   const handleDel = (id) => {
     deleteTask(id)
@@ -10,7 +10,7 @@ const Card = ({ tasks, deleteTask }) => {
   return (
     <>
       {tasks.map((task, index) => (
-        <li
+        <li onDoubleClick={() => updateTask(task.id, !task.complete)}
           key={index}
           className={task.complete ? 'bg-gray-600 text-gray-200 py-4 px-3 rounded-lg transition duration-200 hover hover:bg-gray-700 flex justify-between items-center' : 'bg-green-700  text-gray-200 py-4 px-3 rounded-lg transition duration-200 hover hover:bg-gray-700 flex justify-between items-center'}
         >
