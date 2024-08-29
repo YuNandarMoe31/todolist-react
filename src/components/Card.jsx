@@ -1,11 +1,25 @@
-import React from 'react'
+import React from "react";
+import { BiXCircle } from "react-icons/bi";
 
-const Card = () => {
+const Card = ({ tasks, deleteTask }) => {
+
+  const handleDel = (id) => {
+    deleteTask(id)
+  }
+
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <>
+      {tasks.map((task, index) => (
+        <li
+          key={index}
+          className={task.complete ? 'bg-gray-600 text-gray-200 py-4 px-3 rounded-lg transition duration-200 hover hover:bg-gray-700 flex justify-between items-center' : 'bg-green-700  text-gray-200 py-4 px-3 rounded-lg transition duration-200 hover hover:bg-gray-700 flex justify-between items-center'}
+        >
+          <p className={task.complete ? 'line-through' : ''}>{task.task}</p>
+          <BiXCircle className="text-2xl" onClick={() => handleDel(task.id)} />
+        </li>
+      ))}
+    </>
+  );
+};
 
-export default Card
+export default Card;

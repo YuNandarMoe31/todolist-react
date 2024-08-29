@@ -1,0 +1,19 @@
+{
+  "todolist": [
+    {
+      "id": "1",
+      "task": "To Study Japanese Vocabs",
+      "complete": true
+    },
+    {
+      "id": "2",
+      "task": "To Study ReactJs",
+      "complete": false
+    },
+    {
+      "id": "e0410efa-faa9-7a93-e79e-5aaf485e1862",
+      "task": "aa",
+      "complete": false
+    }
+  ]
+}
